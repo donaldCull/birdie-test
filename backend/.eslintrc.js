@@ -28,7 +28,6 @@ module.exports = {
     "@typescript-eslint/interface-name-prefix": "off",
     "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/no-inferrable-types": "warn",
-    "@typescript-eslint/no-misused-promises": "warn",
     "no-case-declarations": "off",
     "no-extra-boolean-cast": "off",
     "no-unsafe-finally": "off",
