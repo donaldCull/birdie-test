@@ -1,5 +1,5 @@
 import * as express from 'express';
-import { CareRecipientController } from './controllers/ping';
+import { CareRecipientController } from './controllers/CareRecipientController';
 
 const app = express();
 

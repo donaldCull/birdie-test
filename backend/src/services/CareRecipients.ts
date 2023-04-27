@@ -1,8 +1,9 @@
-import { birdieDB } from '../db/mysqlDB';
+import { birdieDB } from '../db/BirdieDB';
 import { CareRecipientModel } from '../model/CareRecipientModel';
 
-interface CareRecipientInterface {
+export interface CareRecipientInterface {
   GetAllCareRecipients: () => Promise<CareRecipientModel[]>;
+  GetCareRecipient: (id: string) => Promise<CareRecipientModel>;
 }
 
 export const CareRecipients = (): CareRecipientInterface => {
@@ -10,6 +11,9 @@ export const CareRecipients = (): CareRecipientInterface => {
   return {
     GetAllCareRecipients: (): Promise<CareRecipientModel[]> => {
       return db.select<CareRecipientModel[]>();
+    },
+    GetCareRecipient: (id: string): Promise<CareRecipientModel> => {
+      return db.select<CareRecipientModel>().where({ id });
     },
   };
 };
