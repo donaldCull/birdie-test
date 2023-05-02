@@ -1,11 +1,11 @@
-import app from '../src/application';
+import app from '../../src/application';
 import * as request from 'supertest';
 import * as mockDB from 'mock-knex';
-import { birdieDB } from '../src/db/BirdieDB';
+import { birdieDB } from '../../src/db/BirdieDB';
 mockDB.mock(birdieDB);
 const tracker = mockDB.getTracker();
 
-describe('CareRecipientController', () => {
+describe('CareGiverController', () => {
   beforeEach(() => tracker.install());
   afterEach(() => tracker.uninstall());
 
