@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 import app from '../src/application';
 import * as request from 'supertest';
 import * as mockDB from 'mock-knex';

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 import app from '../src/application';
 import * as request from 'supertest';
 import * as mockDB from 'mock-knex';
@@ -10,7 +9,7 @@ describe('CareRecipientController', () => {
   beforeEach(() => tracker.install());
   afterEach(() => tracker.uninstall());
 
-  it('should return all care careRecipients to be returned', async () => {
+  it('should return all careRecipients', async () => {
     const mockAllCareRecipients = [{ id: 'id', name: 'test' }];
     tracker.on('query', (query) => query.response(mockAllCareRecipients));
 
@@ -22,7 +21,7 @@ describe('CareRecipientController', () => {
     );
   });
 
-  it('should return one care careRecipient', async () => {
+  it('should return one careRecipient', async () => {
     const mockAllCareRecipient = { id: '1234' };
     tracker.on('query', (query) => {
       query.response(mockAllCareRecipient);
