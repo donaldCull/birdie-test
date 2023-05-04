@@ -2,7 +2,7 @@ import { knex, Knex } from 'knex';
 import { dbHost, dbPass, dbSchema, dbUser } from './variables';
 
 const knexConfig: Knex.Config = {
-  client: 'mysql',
+  client: 'mysql2',
   connection: {
     host: dbHost,
     user: dbUser,

@@ -3,17 +3,22 @@ import { CareRecipientModel } from '../model/CareRecipientModel';
 
 export interface CareRecipientInterface {
   GetAllCareRecipients: () => Promise<CareRecipientModel[]>;
-  GetCareRecipient: (id: string) => Promise<CareRecipientModel>;
+  GetCareRecipient: (id: string) => Promise<CareRecipientModel[]>;
 }
 
 export const CareRecipients = (): CareRecipientInterface => {
-  const db = birdieDB({ tcr: 'test_care_recipients' });
   return {
     GetAllCareRecipients: (): Promise<CareRecipientModel[]> => {
-      return db.select<CareRecipientModel[]>();
+      return birdieDB.raw('select * from test_care_recipients').then((rows) => {
+        return rows[0];
+      });
     },
-    GetCareRecipient: (id: string): Promise<CareRecipientModel> => {
-      return db.select<CareRecipientModel>().where({ id });
+    GetCareRecipient: (id: string): Promise<CareRecipientModel[]> => {
+      return birdieDB
+        .raw('select * from test_care_recipients where id = ?', [id])
+        .then((rows) => {
+          return rows[0];
+        });
     },
   };
 };

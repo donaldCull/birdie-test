@@ -10,22 +10,33 @@ export interface CareEventInterface {
 }
 
 export const CareEvent = (): CareEventInterface => {
-  const db = birdieDB({ e: 'events' });
   return {
     GetCareEventVisit: (visitId: string): Promise<CareEventModel[]> => {
-      return db.select<CareEventModel[]>().where({ visit_id: visitId });
+      return birdieDB
+        .raw('select * from events where visit_id = ?', [visitId])
+        .then((rows) => {
+          return rows[0];
+        });
     },
     GetCareEventsByCareGiver: (
       careGiverId: string
     ): Promise<CareEventModel[]> => {
-      return db.select<CareEventModel[]>().where({ caregiver_id: careGiverId });
+      return birdieDB
+        .raw('select * from events where caregiver_id = ?', [careGiverId])
+        .then((rows) => {
+          return rows[0];
+        });
     },
-    GetCareEventsByCareRecipient(
+    GetCareEventsByCareRecipient: (
       careRecipientId: string
-    ): Promise<CareEventModel[]> {
-      return db
-        .select<CareEventModel[]>()
-        .where({ care_recipient_id: careRecipientId });
+    ): Promise<CareEventModel[]> => {
+      return birdieDB
+        .raw('select * from events where care_recipient_id = ?', [
+          careRecipientId,
+        ])
+        .then((rows) => {
+          return rows[0];
+        });
     },
   };
 };
