@@ -7,11 +7,15 @@ import { CareEventController } from './controllers/CareEventController';
 
 const app = express();
 
-app.use(morgan('combined'));
+app.use(morgan('dev'));
 app.use(cors());
 
 app.get('/', (_req, res) => {
   res.status(200).json('/');
+});
+
+app.get('ping', (_req, res) => {
+  res.status(200).json({ response: 'pong' });
 });
 
 app.use(CareRecipientController);
