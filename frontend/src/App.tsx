@@ -1,12 +1,11 @@
 import { useMemo, useState } from "react";
-import "./App.css";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import CustomizedTimeline from "./components/timeline/Timeline";
 import Grid from "@mui/material/Unstable_Grid2";
 import { Alert, AlertTitle, Typography } from "@mui/material";
-import CareRecipientSelector from "./components/CareRecipientSelector";
+import CareRecipientSelector from "./components/careRecipient/CareRecipientSelector";
 
 function App() {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
