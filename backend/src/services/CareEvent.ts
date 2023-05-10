@@ -31,7 +31,7 @@ export const CareEvent = (): CareEventInterface => {
       careRecipientId: string
     ): Promise<CareEventModel[]> => {
       return birdieDB
-        .raw('select * from events where care_recipient_id = ?', [
+        .raw('select * from events where care_recipient_id = ? order by timestamp asc', [
           careRecipientId,
         ])
         .then((rows) => {

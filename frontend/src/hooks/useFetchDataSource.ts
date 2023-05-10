@@ -6,12 +6,13 @@ const useFetchDataSource = (endpoint: string) => {
   const [data, setData] = useState<null | any>(null);
 
   useEffect(() => {
+    setIsLoading(true);
     makeApiRequest(endpoint)
     .then(d => {
       setData(d);
       setIsLoading(false);
     })
-  }, [endpoint]);
+  }, [endpoint, setIsLoading, setData]);
   return { isLoading, data };
 };
 

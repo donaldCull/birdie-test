@@ -27,7 +27,7 @@ const CareRecipientSelector = (props: {
         onChange={handleChange}
         label='Care recipient'
       >
-        <MenuItem value='default-value'>Select a care recipient</MenuItem>
+        <MenuItem value=''>Select a care recipient</MenuItem>
         {renderMenuItems(isLoading, data)}
       </Select>
       <FormHelperText>Select a person to see their activity</FormHelperText>
