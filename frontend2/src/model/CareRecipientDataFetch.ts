@@ -1,6 +1,6 @@
-import { CareEventModel } from "./CareEventModel";
+import { CareRecipientModel } from "./CareRecipientModel";
 
 export interface CareRecipientDataFetch {
   isLoading: boolean;
-  data: CareEventModel[];
+  data: CareRecipientModel[] | null;
 }

@@ -12,7 +12,8 @@ const useFetchDataSource = (endpoint: string) => {
       setData(d);
       setIsLoading(false);
     })
-  }, [endpoint, setIsLoading, setData]);
+  }, [endpoint]);
+  
   return { isLoading, data };
 };
 

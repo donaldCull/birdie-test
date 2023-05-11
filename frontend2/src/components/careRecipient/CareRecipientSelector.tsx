@@ -1,42 +1,47 @@
-import { FormControl, FormHelperText, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
+import {
+  FormControl,
+  FormHelperText,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+} from "@mui/material";
 import useFetchDataSource from "../../hooks/useFetchDataSource";
-import { CareRecipientModel } from "../../model/CareRecipientModel";
+import { CareRecipientDataFetch } from "../../model/CareRecipientDataFetch";
 
-const CareRecipientSelector = (props: {
-  careRecipient: any,
-  setCareRecipient: any,
-}) => {
+export default function CareRecipientSelector(props: {
+  careRecipient: string;
+  setCareRecipient: React.Dispatch<React.SetStateAction<string>>;
+}) {
   const { careRecipient, setCareRecipient } = props;
-  const { isLoading, data } = useFetchDataSource('careRecipient/all');
-
+  const { isLoading, data }: CareRecipientDataFetch =
+    useFetchDataSource("careRecipient/all");
   const handleChange = (event: SelectChangeEvent) => {
     setCareRecipient(event.target.value as string);
-  }
+  };
 
-  const renderMenuItems = (loading: boolean, itemData: CareRecipientModel[]) => {
-    return loading ? <MenuItem value='loading'>Loading care recipients</MenuItem> : 
-    itemData.map(i => {
-      return <MenuItem key={i.id} value={i.id}>{i.name}</MenuItem>
-    })
-  }
-  
   return (
     <FormControl fullWidth variant="filled">
-      <InputLabel>Care recipient</InputLabel>
+      <InputLabel color="secondary">Care recipient</InputLabel>
       <Select
         data-testid="care-recipient"
         fullWidth
         value={careRecipient}
         onChange={handleChange}
-        label='Care recipient'
+        label="Care recipient"
       >
-        <MenuItem value=''>Select a care recipient</MenuItem>
-        {renderMenuItems(isLoading, data)}
+        <MenuItem value="">Select a care recipient</MenuItem>
+        {isLoading ? (
+          <MenuItem value="loading">Loading care recipients</MenuItem>
+        ) : (
+          data?.map((i) => (
+            <MenuItem key={i.id} value={i.id}>
+              {i.name}
+            </MenuItem>
+          ))
+        )}
       </Select>
       <FormHelperText>Select a person to see their activity</FormHelperText>
     </FormControl>
   );
-
 }
-
-export default CareRecipientSelector;

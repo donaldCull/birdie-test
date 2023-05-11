@@ -1,12 +1,12 @@
 import { cleanup, render, screen } from "@testing-library/react"
 import CustomizedTimeline from "./Timeline"
 import useFetchDataSource from "../../hooks/useFetchDataSource";
-import { CareRecipientDataFetch } from "../../model/CareRecipientDataFetch";
+import { CareEventDataFetch } from "../../model/CareEventDataFetch";
 jest.mock('../../hooks/useFetchDataSource');
 
 
 describe('Timeline', () => {
-  const mockEvents: CareRecipientDataFetch = {
+  const mockEvents: CareEventDataFetch = {
     isLoading: false,
     data: [
       {
