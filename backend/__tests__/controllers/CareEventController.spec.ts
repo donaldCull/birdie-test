@@ -46,7 +46,7 @@ describe('test', () => {
     await request(app).get('/careEvent/careRecipient/555555');
     const query = tracker.queries.first();
     expect(query.sql).toEqual(
-      'select * from events where care_recipient_id = ?'
+      'select * from events where care_recipient_id = ? order by timestamp asc'
     );
     expect(query.bindings[0]).toEqual('555555');
   });
