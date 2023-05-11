@@ -3,17 +3,12 @@ import useFetchDataSource from "../../hooks/useFetchDataSource";
 import { Box, CircularProgress } from "@mui/material";
 import CustomisedTimelineItem from "./TimelineItem";
 import { CareEventModel } from "../../model/CareEventModel";
-
-interface CareRecipientDataFetch {
-  isLoading: boolean;
-  data: CareEventModel[];
-}
+import { CareRecipientDataFetch } from "../../model/CareRecipientDataFetch";
 
 export default function CustomizedTimeline(props: { careRecipient: string }) {
   const { isLoading, data }: CareRecipientDataFetch = useFetchDataSource(
     `careEvent/careRecipient/${props.careRecipient}`
   );
-  console.log(isLoading, props.careRecipient);
   return isLoading ? (
     <Box
       sx={{

@@ -6,6 +6,6 @@ export default function FormatCareEventTimestamp(eventTimestamp: string): string
   });
   let t = eventTimestamp.split(/[- : + T .]/);
   let numT = t.map(s => Number.parseInt(s));
-  let d = new Date(Date.UTC(numT[0], numT[1], numT[2], numT[3]-1, numT[4], numT[5]));
+  let d = new Date(Date.UTC(numT[0], numT[1]-1, numT[2], numT[3]-1, numT[4], numT[5]));
   return dtFormat.format(d)
 }

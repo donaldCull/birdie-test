@@ -10,6 +10,7 @@ import { Medication, AddAlertRounded, WavingHand, Handshake, AssignmentTurnedIn,
 import Typography from "@mui/material/Typography";
 import { CareEventPayload } from "../../model/CareEventModel";
 import FormatCareEventTimestamp from "../../util/FormatCareEventTimestamp";
+import { CareEventTypes } from "../../model/CareEventTypes";
 
 export default function CustomisedTimelineItem(props: {
   payload: CareEventPayload;
@@ -34,7 +35,7 @@ function BuildTimelineContent(eventPayload: CareEventPayload) {
   const mealDesription = `${eventPayload.meal || 'Serving'} of ${eventPayload.note || 'food. Description not recorded.'}`;
   const moodDescription = `${eventPayload.mood || 'Mood'} - ${eventPayload.note || 'Description not recorded'}`;
 
-  const itemTypes: any = {
+  const itemTypes: CareEventTypes = {
     alert_raised: CustomEventContent('Alert raised', '', <AddAlertRounded color="secondary" fontSize="large"/>),
     alert_qualified: CustomEventContent('Alert qualified', '', <AddAlertRounded color="secondary" fontSize="large"/>),
     concern_raised: CustomEventContent('Concern raised', `${eventPayload.note || ''} - Severity: ${eventPayload.severity || 'not recorded'}`, <PsychologyAlt color="error" fontSize="large"/>),
@@ -51,7 +52,7 @@ function BuildTimelineContent(eventPayload: CareEventPayload) {
     regular_medication_not_taken: CustomEventContent('Regular medication not taken', eventPayload.note || '', <Medication color="primary" fontSize="large"/>),
     regular_medication_partially_taken: CustomEventContent('Regular medication partially taken', eventPayload.note || '', <Medication color="primary" fontSize="large"/>),
     regular_medication_maybe_taken: CustomEventContent('Regular medication maybe taken', eventPayload.note || '', <Medication color="primary" fontSize="large"/>),
-    no_medication_observation_received: CustomEventContent('No medication observed', '', <Medication color="warning" fontSize="large"/>),
+    no_medication_observation_received: CustomEventContent('No medication observation received', '', <Medication color="warning" fontSize="large"/>),
     mood_observation: CustomEventContent('Mood observation', moodDescription, CustomMoodIcon(eventPayload.mood || 'okay')),
     incontinence_pad_observation: CustomEventContent('Incontinence pad observation', eventPayload.note || '', <SupervisedUserCircle color="primary" fontSize="large"/>),
     physical_health_observation: CustomEventContent('Physical health observation', eventPayload.note || '', <MedicalInformation color="primary" fontSize="large"/>),
@@ -62,7 +63,7 @@ function BuildTimelineContent(eventPayload: CareEventPayload) {
     catheter_observation: CustomEventContent('Catheter observation', eventPayload.note || '', <SupervisedUserCircle />),
     toilet_visit_recorded: CustomEventContent('Toilet visit recorded', eventPayload.note || '', <Wc color="primary" fontSize="large"/>)
   };
-  return itemTypes[eventPayload.event_type] || undefined;
+  return itemTypes[eventPayload.event_type as keyof CareEventTypes] || undefined;
 }
 
 function CustomFluidIcon(fluidType: string) {
@@ -92,7 +93,6 @@ function CustomEventContent(title: string, description: string, Icon: JSX.Elemen
       <TimelineConnector />
       <TimelineDot sx={{ m: '7px', backgroundColor: 'primary.contrastText'}}>
         {Icon}
-        {/* <Icon color="primary" fontSize="large"/> */}
       </TimelineDot>
       <TimelineConnector />
     </TimelineSeparator>
@@ -100,7 +100,7 @@ function CustomEventContent(title: string, description: string, Icon: JSX.Elemen
       <Typography variant="h6" component="span">
         {title}
       </Typography>
-      <Typography>{description || ''}</Typography>
+      <Typography sx={{ textTransform: 'capitalize' }}>{description || ''}</Typography>
     </TimelineContent>
   </>
   )
