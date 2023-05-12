@@ -6,12 +6,18 @@ import RateLimit from 'express-rate-limit';
 import { CareRecipientController } from './controllers/CareRecipientController';
 import { CareGiverController } from './controllers/CareGiverController';
 import { CareEventController } from './controllers/CareEventController';
+import { corsOrigin, nodeEnv } from './db/variables';
 
 const app = express();
+const loggingMode = nodeEnv === 'development' ? 'dev' : 'common';
 
+app.disable('x-powered-by');
 app.use(helmet());
-app.use(morgan('dev'));
-app.use(cors());
+app.use(morgan(loggingMode));
+app.use(cors({
+  origin: corsOrigin,
+  optionsSuccessStatus: 200,
+}));
 
 const limiter = RateLimit({
   windowMs: 1 * 60 * 1000, // 1 minute
